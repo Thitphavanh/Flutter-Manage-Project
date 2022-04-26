@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/constanrs/assets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -24,19 +25,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Center(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text('Phenomenal'),
-            Icon(Icons.person),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('click'),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          Image.asset(Assets.LOGO_IMAGE),
+        ],
       ),
     );
   }
