@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -92,10 +93,15 @@ class _LoginFormState extends State<LoginForm> {
               _errorPassword = 'Must be at least 8 characters';
             }
             if (_errorUsername == null && _errorPassword == null) {
-              if (username == 'hery@gmail.com' && password == '12345678') {
-
-                
-              }
+              showLoading();
+              Future.delayed(Duration(seconds: 2)).then((value) {
+                Navigator.pop(context);
+                if (username == 'hery@gmail.com' && password == '12345678') {
+                  print('login successfully');
+                } else {
+                  showAlertBar();
+                }
+              });
             } else {
               setState(() {});
             }
@@ -145,6 +151,39 @@ class _LoginFormState extends State<LoginForm> {
         // stops: [0.0, 1.0],
       ),
     );
+  }
+
+  void showAlertBar() {
+    Flushbar(
+      margin: EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(8),
+      title: 'Username or Password is inccorrect',
+      message: 'Please try again',
+      backgroundColor: Colors.black,
+      icon: Icon(
+        Icons.error,
+        size: 28.0,
+        color: Colors.red,
+      ),
+      duration: Duration(seconds: 3),
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black,
+          offset: Offset(0.0, 2.0),
+          blurRadius: 3.0,
+        )
+      ],
+    )..show(context);
+  }
+
+  void showLoading() {
+    Flushbar(
+      borderRadius: BorderRadius.circular(8),
+      message: 'Loading...',
+      showProgressIndicator: true,
+      flushbarPosition: FlushbarPosition.TOP,
+      flushbarStyle: FlushbarStyle.GROUNDED,
+    )..show(context);
   }
 }
 
