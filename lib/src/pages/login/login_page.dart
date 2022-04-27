@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
-import 'package:flutter_project_manage/src/constanrs/assets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'widgets/header.dart';
+import 'widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,17 +14,14 @@ class LoginPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: custom_theme.Theme.gradient,
             ),
           ),
           Column(
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 50, bottom: 38),
-                child: Image.asset(Assets.LOGO_IMAGE),
-              ),
-              Text('form'),
+              Header(),
+              LoginForm(),
               Text('forgot password'),
               Text('SSO'),
               Text('register'),
