@@ -1,11 +1,38 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginForm extends StatelessWidget {
+import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
+import 'package:flutter_project_manage/src/utils/RegexValidator.dart';
+
+class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  TextEditingController? usernameControlller;
+  TextEditingController? passwordControlller;
+
+  String? _errorUsername;
+  String? _errorPassword;
+
+  @override
+  void initState() {
+    usernameControlller = TextEditingController();
+    passwordControlller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    usernameControlller!.dispose();
+    passwordControlller!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +63,12 @@ class LoginForm extends StatelessWidget {
           right: 18,
           left: 18,
         ),
-        child: FormInput(),
+        child: FormInput(
+          usernameControlller: usernameControlller,
+          passwordControlller: passwordControlller,
+          errorUsername: _errorUsername,
+          errorPassword: _errorPassword,
+        ),
       ),
     );
   }
@@ -46,7 +78,31 @@ class LoginForm extends StatelessWidget {
         height: 50,
         decoration: _boxDecoration(),
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            String username = usernameControlller!.text;
+            String password = passwordControlller!.text;
+
+            _errorUsername = null;
+            _errorPassword = null;
+
+            if (!EmailSubmitRegexValidator().isValid(username)) {
+              _errorUsername = 'The Email must be a valid email.';
+            }
+            if (password.length < 8) {
+              _errorPassword = 'Must be at least 8 characters';
+            }
+            if (_errorUsername == null && _errorPassword == null) {
+              if (username == 'hery@gmail.com' && password == '12345678') {
+
+                
+              }
+            } else {
+              setState(() {});
+            }
+
+            print(usernameControlller!.text);
+            print(passwordControlller!.text);
+          },
           child: const Text(
             'LOGIN',
             style: TextStyle(
@@ -57,6 +113,7 @@ class LoginForm extends StatelessWidget {
           ),
         ),
       );
+
   BoxDecoration _boxDecoration() {
     final gradientStart = custom_theme.Theme.gradientStart;
     final gradientEnd = custom_theme.Theme.gradientEnd;
@@ -92,8 +149,17 @@ class LoginForm extends StatelessWidget {
 }
 
 class FormInput extends StatefulWidget {
+  final TextEditingController? usernameControlller;
+  final TextEditingController? passwordControlller;
+  final String? errorUsername;
+  final String? errorPassword;
+
   const FormInput({
     Key? key,
+    @required this.usernameControlller,
+    @required this.passwordControlller,
+    @required this.errorUsername,
+    @required this.errorPassword,
   }) : super(key: key);
 
   @override
@@ -102,19 +168,13 @@ class FormInput extends StatefulWidget {
 
 class _FormInputState extends State<FormInput> {
   final _color = Colors.black54;
-  final usernameControlller = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         _buildUsername(),
-        Divider(
+        const Divider(
           height: 22,
           thickness: 1,
           indent: 13,
@@ -127,6 +187,7 @@ class _FormInputState extends State<FormInput> {
 
   TextFormField _buildPassword() {
     return TextFormField(
+      controller: widget.passwordControlller,
       decoration: InputDecoration(
         border: InputBorder.none,
         labelText: 'Password :',
@@ -136,6 +197,7 @@ class _FormInputState extends State<FormInput> {
           size: 22.0,
           color: _color,
         ),
+        errorText: widget.errorPassword,
       ),
       obscureText: true,
     );
@@ -148,7 +210,7 @@ class _FormInputState extends State<FormInput> {
 
   TextFormField _buildUsername() {
     return TextFormField(
-      controller: usernameControlller,
+      controller: widget.usernameControlller,
       decoration: InputDecoration(
         border: InputBorder.none,
         labelText: 'Email Address :',
@@ -159,6 +221,7 @@ class _FormInputState extends State<FormInput> {
           size: 22.0,
           color: _color,
         ),
+        errorText: widget.errorUsername,
       ),
     );
   }

@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Image.asset(Assets.LOGO_IMAGE),
-          
         ],
       ),
     );
