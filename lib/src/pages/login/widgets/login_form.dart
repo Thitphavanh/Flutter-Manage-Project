@@ -1,10 +1,12 @@
 // ignore_for_file: deprecated_member_use
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/constanrs/setting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
 import 'package:flutter_project_manage/src/config/route.dart' as custom_route;
 import 'package:flutter_project_manage/src/utils/RegexValidator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -171,7 +173,7 @@ class _LoginFormState extends State<LoginForm> {
     }
     if (_errorUsername == null && _errorPassword == null) {
       showLoading();
-      Future.delayed(const Duration(seconds: 2)).then((value) {
+      Future.delayed(const Duration(seconds: 2)).then((value) async {
         Navigator.pop(context);
         if (username == 'hery@gmail.com' && password == '12345678') {
           // Navigator.pushReplacement(
@@ -183,14 +185,12 @@ class _LoginFormState extends State<LoginForm> {
           //     ),
           //   ),
           // );
-          Navigator.pushReplacementNamed(
-            context,
-            custom_route.Route.home,
-            arguments: {
-              'name': 'Hery',
-              'age': 27,
-            },
-          );
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString(Setting.token_pref, 'afdaghtdrfwrtwgsg');
+          prefs.setString(Setting.username_pref, username);
+
+          Navigator.pushReplacementNamed(context, custom_route.Route.home);
         } else {
           showAlertBar();
           setState(() {});
