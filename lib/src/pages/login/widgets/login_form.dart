@@ -176,16 +176,6 @@ class _LoginFormState extends State<LoginForm> {
       Future.delayed(const Duration(seconds: 2)).then((value) async {
         Navigator.pop(context);
         if (username == 'hery@gmail.com' && password == '12345678') {
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => HomePage(
-          //       name: 'Hery',
-          //       age: 27,
-          //     ),
-          //   ),
-          // );
-
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString(Setting.token_pref, 'afdaghtdrfwrtwgsg');
           prefs.setString(Setting.username_pref, username);
