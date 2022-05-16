@@ -17,18 +17,20 @@ class SingleSignOnViewModel {
         SingleSignOn(
             icon: FontAwesomeIcons.apple,
             backgroundColor: Color(0xFF323232),
-            onPress: () {}),
+            onPress: () {
+              print('xxx');
+            }),
         SingleSignOn(
             icon: FontAwesomeIcons.google,
             backgroundColor: Color(0xFFd7483b),
-            onPress: () {}),
+            onPress: () {print('xxx');}),
         SingleSignOn(
             icon: FontAwesomeIcons.facebook,
             backgroundColor: Color(0xFF4063ae),
-            onPress: () {}),
+            onPress: () {print('xxx');}),
         SingleSignOn(
             icon: FontAwesomeIcons.line,
             backgroundColor: Color(0xFF21b54d),
-            onPress: () {}),
+            onPress: () {print('xxx');}),
       ];
 }
