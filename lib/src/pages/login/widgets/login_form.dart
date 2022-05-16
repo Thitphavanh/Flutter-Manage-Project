@@ -1,11 +1,9 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_manage/src/pages/home/home_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
+import 'package:flutter_project_manage/src/config/route.dart' as custom_route;
 import 'package:flutter_project_manage/src/utils/RegexValidator.dart';
 
 class LoginForm extends StatefulWidget {
@@ -176,14 +174,22 @@ class _LoginFormState extends State<LoginForm> {
       Future.delayed(const Duration(seconds: 2)).then((value) {
         Navigator.pop(context);
         if (username == 'hery@gmail.com' && password == '12345678') {
-          Navigator.pushReplacement(
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => HomePage(
+          //       name: 'Hery',
+          //       age: 27,
+          //     ),
+          //   ),
+          // );
+          Navigator.pushReplacementNamed(
             context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(
-                name: 'Hery',
-                age: 27,
-              ),
-            ),
+            custom_route.Route.home,
+            arguments: {
+              'name': 'Hery',
+              'age': 27,
+            },
           );
         } else {
           showAlertBar();
