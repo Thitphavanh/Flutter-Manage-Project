@@ -177,7 +177,7 @@ class _LoginFormState extends State<LoginForm> {
         Navigator.pop(context);
         if (username == 'hery@gmail.com' && password == '12345678') {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString(Setting.token_pref, 'afdaghtdrfwrtwgsg23');
+          prefs.setString(Setting.token_pref, 'afdaghtdrfwrtwgsg2dsd3');
           prefs.setString(Setting.username_pref, username);
 
           Navigator.pushReplacementNamed(context, custom_route.Route.home);

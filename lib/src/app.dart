@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_manage/src/constanrs/setting.dart';
 import 'package:flutter_project_manage/src/pages/home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/login/login_page.dart';
@@ -26,9 +25,9 @@ class App extends StatelessWidget {
             if (token.isNotEmpty) {
               return HomePage();
             }
-            return LoginPage();
+            return const LoginPage();
           }
-          return SizedBox();
+          return const SizedBox();
         },
       ),
     );
