@@ -20,14 +20,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
         children: [
           _buildProfile(),
           ..._buildMainMenu(),
-          Spacer(),
+          const Spacer(),
           ListTile(
-            leading: FaIcon(
+            leading: const FaIcon(
               // ignore: deprecated_member_use
               FontAwesomeIcons.signOutAlt,
               color: Colors.black,
             ),
-            title: Text(
+            title: const Text(
               'LOGOUT',
               style: TextStyle(color: Colors.red),
             ),
@@ -50,7 +50,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
-              child: Text(
+              child: const Text(
                 'Cancel',
                 style: TextStyle(color: Colors.black),
               ),
@@ -108,6 +108,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
               item.icon,
               color: item.iconColor,
             ),
+            onTap: () {
+              item.onTap!(context);
+            },
           ),
         )
         .toList();
