@@ -15,10 +15,10 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text('Shop'),
+        title:  Text('Stock Shop'),
       ),
       drawer: CustomDrawer(),
-      body: Image.asset(Assets.LOGO_IMAGE),
+      body: Center(child: Image.asset(Assets.LOGO_IMAGE)),
     );
   }
 }
