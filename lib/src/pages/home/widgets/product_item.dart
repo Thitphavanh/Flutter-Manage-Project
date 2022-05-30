@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/pages/home/widgets/image_not_found.dart';
 import 'package:flutter_project_manage/src/utils/format.dart';
 
 class ProductItem extends StatelessWidget {
@@ -28,14 +29,19 @@ class ProductItem extends StatelessWidget {
     final width = double.infinity;
     final productImage =
         'https://cdn-images-1.medium.com/max/280/1*X5PBTDQQ2Csztg3a6wofIQ@2x.png';
+
+    final stock = 1;
+
     return Stack(
       children: [
-        Image.network(
-          productImage,
-          height: height,
+        SizedBox(
           width: width,
+          height: height,
+          child: productImage != null && productImage.isNotEmpty
+              ? Image.network(productImage)
+              : ImageNotFound(),
         ),
-        _buildOutofStock(),
+        if (stock <= 0) _buildOutofStock(),
       ],
     );
   }
