@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/utils/format.dart';
 
 class ProductItem extends StatelessWidget {
   final double maxHeight;
@@ -6,24 +7,36 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          _buildImage(),
-          _buildInfor(),
-        ],
+    return GestureDetector(
+      onTap: () {
+        print('xxxx');
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            _buildImage(),
+            _buildInfor(),
+          ],
+        ),
       ),
     );
   }
 
-  Image _buildImage() {
+  Stack _buildImage() {
     final height = maxHeight * 0.7;
+    final width = double.infinity;
     final productImage =
         'https://cdn-images-1.medium.com/max/280/1*X5PBTDQQ2Csztg3a6wofIQ@2x.png';
-    return Image.network(
-      productImage,
-      height: height,
+    return Stack(
+      children: [
+        Image.network(
+          productImage,
+          height: height,
+          width: width,
+        ),
+        _buildOutofStock(),
+      ],
     );
   }
 
@@ -33,20 +46,53 @@ class ProductItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'nter Miami CF ແລະເປັນເຈົ້າຂອງຮ່ວມຂອງ Salford City. ລາວໄດ້ຫຼິ້ນໃຫ້ກັບ Manchester United, Preston North End (ຢືມຕົວ), Real Madrid, ເອຊີມິລານ (ຢືມ), LA Galaxy',
+              'Flutter',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('100000 LAK'),
-                Text('222222 pices'),
+                Text(
+                  '₭${forMatCurrency.format(10000)}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${forMatNumber.format(1500)} pices',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepOrangeAccent),
+                ),
               ],
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Positioned _buildOutofStock() {
+    return const Positioned(
+      right: 2,
+      top: 2,
+      child: Card(
+        margin: EdgeInsets.all(0),
+        color: Colors.amber,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 8.0,
+            vertical: 4.0,
+          ),
+          child: Text(
+            'Outof stack',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12.0,
+            ),
+          ),
         ),
       ),
     );
