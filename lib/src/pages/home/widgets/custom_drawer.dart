@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/constanrs/setting.dart';
 import 'package:flutter_project_manage/src/viewmodels/menu_view_model.dart';
@@ -104,9 +105,20 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 fontSize: 18.0,
               ),
             ),
-            leading: FaIcon(
-              item.icon,
-              color: item.iconColor,
+            leading: Badge(
+              showBadge: item.icon == FontAwesomeIcons.inbox,
+              badgeContent: const Text(
+                '99',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+              ),
+              badgeColor: Colors.red,
+              child: FaIcon(
+                item.icon,
+                color: item.iconColor,
+              ),
             ),
             onTap: () {
               item.onTap!(context);
