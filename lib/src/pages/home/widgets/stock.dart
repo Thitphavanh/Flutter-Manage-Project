@@ -8,6 +8,7 @@ class Stock extends StatelessWidget {
     return Center(
       child: FlutterLogo(
         style: FlutterLogoStyle.horizontal,
+        size: 450,
       ),
     );
   }

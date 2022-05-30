@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_manage/src/constanrs/assets.dart';
-import 'package:flutter_project_manage/src/pages/home/widgets/chart.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/custom_drawer.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/custom_tabbar.dart';
-import 'package:flutter_project_manage/src/pages/home/widgets/report.dart';
-import 'package:flutter_project_manage/src/pages/home/widgets/stock.dart';
+import 'package:flutter_project_manage/src/viewmodels/tab_menu_view_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,28 +9,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _tabsMenu = TabMenuViewModel().items;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: _tabsMenu.length,
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Text('Stock Shop'),
-          bottom: CustomTabbar(),
-        ),
+        appBar: _buildAppBar(),
         drawer: const CustomDrawer(),
-        body: const TabBarView(
-          children: [
-            Stock(),
-            Chart(),
-            Report(),
-          ],
+        body: TabBarView(
+          children: _tabsMenu.map((item) => item.widget!).toList(),
         ),
       ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      centerTitle: true,
+      foregroundColor: Colors.black,
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: const Text('Stock Shop'),
+      bottom: CustomTabbar(_tabsMenu),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.bookmark_border,
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.qr_code,
+          ),
+        ),
+      ],
     );
   }
 }
