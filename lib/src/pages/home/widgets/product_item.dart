@@ -27,17 +27,28 @@ class ProductItem extends StatelessWidget {
     );
   }
 
-  Column _buildInfor() {
-    return Column(
-      children: [
-        Text(''),
-        Row(
+  Expanded _buildInfor() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('100000'),
-            Text('222222'),
+            Text(
+              'nter Miami CF ແລະເປັນເຈົ້າຂອງຮ່ວມຂອງ Salford City. ລາວໄດ້ຫຼິ້ນໃຫ້ກັບ Manchester United, Preston North End (ຢືມຕົວ), Real Madrid, ເອຊີມິລານ (ຢືມ), LA Galaxy',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('100000 LAK'),
+                Text('222222 pices'),
+              ],
+            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }
