@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/config/colors.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/custom_drawer.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/custom_tabbar.dart';
 import 'package:flutter_project_manage/src/viewmodels/tab_menu_view_model.dart';
@@ -38,12 +39,14 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {},
           icon: Icon(
             Icons.bookmark_border,
+            color: MyColors.deeporange,
           ),
         ),
         IconButton(
           onPressed: () {},
           icon: Icon(
             Icons.qr_code,
+            color: MyColors.deeporange,
           ),
         ),
       ],
