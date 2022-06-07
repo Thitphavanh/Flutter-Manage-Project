@@ -23,7 +23,7 @@ class Stock extends StatelessWidget {
           return ProductItem(constraints.maxHeight);
         },
       ),
-      itemCount: 5,
+      itemCount: 6,
     );
   }
 }

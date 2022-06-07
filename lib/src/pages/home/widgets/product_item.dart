@@ -30,7 +30,7 @@ class ProductItem extends StatelessWidget {
     final productImage =
         'https://cdn-images-1.medium.com/max/280/1*X5PBTDQQ2Csztg3a6wofIQ@2x.png';
 
-    final stock = 1;
+    final stock = 0;
 
     return Stack(
       children: [
