@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/product_item.dart';
 import 'package:flutter_project_manage/src/services/network_service.dart';
-
 import '../../../models/post.dart';
 
-class Stock extends StatelessWidget {
+class Stock extends StatefulWidget {
+  @override
+  State<Stock> createState() => _StockState();
+}
+
+class _StockState extends State<Stock> {
   final _spacing = 4.0;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Post>?>(
@@ -20,10 +25,17 @@ class Stock extends StatelessWidget {
               child: const Text('No Data'),
             );
           }
-          return _buildProductGridView(post);
+          return RefreshIndicator(
+            onRefresh: () async {
+              setState(() {});
+            },
+            child: _buildProductGridView(post),
+          );
         }
         if (snapshot.hasError) {
-          return Center(
+          return Container(
+            margin: const EdgeInsets.only(top: 22.0),
+            alignment: Alignment.topCenter,
             child: Text(snapshot.error.toString()),
           );
         }
