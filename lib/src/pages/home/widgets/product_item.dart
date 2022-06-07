@@ -54,8 +54,8 @@ class ProductItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Flutter',
+            const Text(
+              "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking You've visited this page many times. Last visit: 4/16/22",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -64,11 +64,11 @@ class ProductItem extends StatelessWidget {
               children: [
                 Text(
                   '₭${forMatCurrency.format(10000)}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   '${forMatNumber.format(1500)} pices',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.deepOrangeAccent),
                 ),
@@ -93,7 +93,7 @@ class ProductItem extends StatelessWidget {
             vertical: 4.0,
           ),
           child: Text(
-            'Outof stack',
+            'Out of stack',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 12.0,
