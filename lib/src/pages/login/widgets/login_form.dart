@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/config/colors.dart';
 import 'package:flutter_project_manage/src/constanrs/setting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
@@ -79,7 +80,8 @@ class _LoginFormState extends State<LoginForm> {
         width: 220,
         height: 50,
         decoration: _boxDecoration(),
-        child: FlatButton(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(backgroundColor: MyColors.orange),
           onPressed: _onLogin,
           child: const Text(
             'LOGIN',
@@ -96,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
     const gradientStart = custom_theme.Theme.gradientStart;
     const gradientEnd = custom_theme.Theme.gradientEnd;
 
-    final boxShadowItem = (Color color) => BoxShadow(
+    boxShadowItem(Color color) => BoxShadow(
           color: color,
           offset: const Offset(1.0, 6.0),
           blurRadius: 20.0,
@@ -155,7 +157,7 @@ class _LoginFormState extends State<LoginForm> {
       showProgressIndicator: true,
       flushbarPosition: FlushbarPosition.TOP,
       flushbarStyle: FlushbarStyle.GROUNDED,
-    )..show(context);
+    ).show(context);
   }
 
   void _onLogin() {

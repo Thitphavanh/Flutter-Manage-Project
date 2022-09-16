@@ -44,7 +44,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: TextFormField(
                   keyboardType: TextInputType.name,
                   onChanged: (String string) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Display Name :',
                   ),
@@ -88,7 +88,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (String string) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Email :',
                   ),
@@ -130,7 +130,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: TextFormField(
                   keyboardType: TextInputType.visiblePassword,
                   onChanged: (String string) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Password :',
                   ),
@@ -174,7 +174,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   onChanged: (String string) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Address :',
                   ),
@@ -217,7 +217,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 child: TextFormField(
                   keyboardType: TextInputType.phone,
                   onChanged: (String string) {},
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Phone :',
                   ),
@@ -243,7 +243,7 @@ class _CreateAccountState extends State<CreateAccount> {
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'Create Account',
                     style: TextStyle(
                       fontSize: 18,

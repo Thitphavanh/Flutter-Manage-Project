@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter_project_manage/src/models/post.dart';
+import 'package:flutter_project_manage/src/models/post_model.dart';
 
 class NetworkService {
   NetworkService._internal();
@@ -11,7 +11,7 @@ class NetworkService {
 
   static final _dio = Dio();
 
-  Future<List<Post>?> fetchPosts(int startIndex, {int limit = 10}) async {
+  Future<List<Post>> fetchPosts(int startIndex, {int limit = 50}) async {
     // https://jsonplaceholder.typicode.com/posts?_start=0&_limit=10
     final url =
         'https://jsonplaceholder.typicode.com/posts?_start=$startIndex&_limit=$limit';

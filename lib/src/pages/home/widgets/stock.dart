@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/product_item.dart';
 import 'package:flutter_project_manage/src/services/network_service.dart';
-import '../../../models/post.dart';
+import '../../../models/post_model.dart';
 
 class Stock extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _StockState extends State<Stock> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Post>?>(
+    return FutureBuilder<List<Post>>(
       future: NetworkService().fetchPosts(0),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
