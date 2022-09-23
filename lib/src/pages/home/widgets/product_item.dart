@@ -1,10 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/constanrs/api.dart';
+
+import 'package:flutter_project_manage/src/models/product.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/image_not_found.dart';
 import 'package:flutter_project_manage/src/utils/format.dart';
 
 class ProductItem extends StatelessWidget {
   final double maxHeight;
-  ProductItem(this.maxHeight);
+  final Product product;
+
+  const ProductItem(
+    this.maxHeight,
+    this.product,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +35,8 @@ class ProductItem extends StatelessWidget {
 
   Stack _buildImage() {
     final height = maxHeight * 0.7;
-    final width = double.infinity;
-    final productImage =
-        'https://cdn-images-1.medium.com/max/280/1*X5PBTDQQ2Csztg3a6wofIQ@2x.png';
-
-    final stock = 0;
+    const width = double.infinity;
+    final productImage = product.image;
 
     return Stack(
       children: [
@@ -38,10 +44,10 @@ class ProductItem extends StatelessWidget {
           width: width,
           height: height,
           child: productImage != null && productImage.isNotEmpty
-              ? Image.network(productImage)
-              : ImageNotFound(),
+              ? Image.network('${API.IMAGE_URL}/$productImage')
+              : const ImageNotFound(),
         ),
-        if (stock <= 0) _buildOutofStock(),
+        if (product.stock! <= 0) _buildOutofStock(),
       ],
     );
   }
@@ -54,8 +60,8 @@ class ProductItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking You've visited this page many times. Last visit: 4/16/22",
+            Text(
+              product.name!,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -63,11 +69,11 @@ class ProductItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '₭${forMatCurrency.format(10000)}',
+                  'THB ${forMatCurrency.format(product.price)}',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${forMatNumber.format(1500)} pices',
+                  '${forMatNumber.format(product.stock)} pices',
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.deepOrangeAccent),

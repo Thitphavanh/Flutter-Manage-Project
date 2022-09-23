@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/product_item.dart';
 import 'package:flutter_project_manage/src/services/network_service.dart';
-import '../../../models/post_model.dart';
+import '../../../models/product.dart';
 
 class Stock extends StatefulWidget {
   @override
@@ -13,12 +13,12 @@ class _StockState extends State<Stock> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Post>>(
-      future: NetworkService().fetchPosts(0),
+    return FutureBuilder<List<Product>>(
+      future: NetworkService().getAllProduct(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<Post>? post = snapshot.data;
-          if (post == null || post.isEmpty) {
+          List<Product>? product = snapshot.data;
+          if (product == null || product.isEmpty) {
             return Container(
               margin: const EdgeInsets.only(top: 22.0),
               alignment: Alignment.topCenter,
@@ -29,7 +29,7 @@ class _StockState extends State<Stock> {
             onRefresh: () async {
               setState(() {});
             },
-            child: _buildProductGridView(post),
+            child: _buildProductGridView(product),
           );
         }
         if (snapshot.hasError) {
@@ -46,7 +46,7 @@ class _StockState extends State<Stock> {
     );
   }
 
-  GridView _buildProductGridView(List<Post> post) {
+  GridView _buildProductGridView(List<Product> product) {
     return GridView.builder(
       padding: EdgeInsets.only(
         left: _spacing,
@@ -62,10 +62,10 @@ class _StockState extends State<Stock> {
       ),
       itemBuilder: (context, index) => LayoutBuilder(
         builder: (context, BoxConstraints constraints) {
-          return ProductItem(constraints.maxHeight);
+          return ProductItem(constraints.maxHeight, product[index]);
         },
       ),
-      itemCount: post.length,
+      itemCount: product.length,
     );
   }
 }
