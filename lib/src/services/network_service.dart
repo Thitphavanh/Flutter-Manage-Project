@@ -11,10 +11,27 @@ class NetworkService {
 
   factory NetworkService() => _instance;
 
-  static final _dio = Dio();
+  static final _dio = Dio()
+    ..interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.baseUrl = API.basesUrl;
+          options.connectTimeout = 5000;
+          options.receiveTimeout = 3000;
+
+          return handler.next(options); //continue
+        },
+        onResponse: (response, handler) {
+          return handler.next(response); // continue
+        },
+        onError: (DioError err, handler) {
+          return handler.next(err); //continue
+        },
+      ),
+    );
 
   Future<List<Product>> getAllProduct() async {
-    const url = '${API.baseUrl}${API.productUrl}';
+    const url = API.productsUrl;
     final Response response = await _dio.get(url);
     if (response.statusCode == 200) {
       return productFromJson(jsonEncode(response.data));

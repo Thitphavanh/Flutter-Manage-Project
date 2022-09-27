@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/product_item.dart';
 import 'package:flutter_project_manage/src/services/network_service.dart';
@@ -36,7 +37,7 @@ class _StockState extends State<Stock> {
           return Container(
             margin: const EdgeInsets.only(top: 22.0),
             alignment: Alignment.topCenter,
-            child: Text(snapshot.error.toString()),
+            child: Text((snapshot.error as DioError).message),
           );
         }
         return const Center(

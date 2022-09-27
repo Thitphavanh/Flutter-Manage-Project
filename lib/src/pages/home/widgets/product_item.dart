@@ -44,7 +44,7 @@ class ProductItem extends StatelessWidget {
           width: width,
           height: height,
           child: productImage != null && productImage.isNotEmpty
-              ? Image.network('${API.imageUrl}/$productImage')
+              ? Image.network('${API.imagesUrl}/$productImage')
               : const ImageNotFound(),
         ),
         if (product.stock! <= 0) _buildOutofStock(),
