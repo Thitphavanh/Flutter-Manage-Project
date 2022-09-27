@@ -16,21 +16,27 @@ class SingleSignOnViewModel {
   List<SingleSignOn> get items => <SingleSignOn>[
         SingleSignOn(
             icon: FontAwesomeIcons.apple,
-            backgroundColor: Color(0xFF323232),
+            backgroundColor: const Color(0xFF323232),
             onPress: () {
               print('xxx');
             }),
         SingleSignOn(
             icon: FontAwesomeIcons.google,
-            backgroundColor: Color(0xFFd7483b),
-            onPress: () {print('xxx');}),
+            backgroundColor: const Color(0xFFd7483b),
+            onPress: () {
+              print('xxx');
+            }),
         SingleSignOn(
             icon: FontAwesomeIcons.facebook,
-            backgroundColor: Color(0xFF4063ae),
-            onPress: () {print('xxx');}),
+            backgroundColor: const Color(0xFF4063ae),
+            onPress: () {
+              print('xxx');
+            }),
         SingleSignOn(
             icon: FontAwesomeIcons.line,
-            backgroundColor: Color(0xFF21b54d),
-            onPress: () {print('xxx');}),
+            backgroundColor: const Color(0xFF21b54d),
+            onPress: () {
+              print('xxx');
+            }),
       ];
 }

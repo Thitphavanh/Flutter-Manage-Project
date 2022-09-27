@@ -6,7 +6,7 @@ import 'package:flutter_project_manage/src/constanrs/setting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_project_manage/src/config/theme.dart' as custom_theme;
 import 'package:flutter_project_manage/src/config/route.dart' as custom_route;
-import 'package:flutter_project_manage/src/utils/RegexValidator.dart';
+import 'package:flutter_project_manage/src/utils/regex_validator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {

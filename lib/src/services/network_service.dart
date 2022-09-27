@@ -14,8 +14,7 @@ class NetworkService {
   static final _dio = Dio();
 
   Future<List<Product>> getAllProduct() async {
-    const url = '${API.BASE_URL}${API.PRODUCT}';
-
+    const url = '${API.baseUrl}${API.productUrl}';
     final Response response = await _dio.get(url);
     if (response.statusCode == 200) {
       return productFromJson(jsonEncode(response.data));
