@@ -6,3 +6,5 @@ void main() {
 }
 
 // Flutter online: Product Form part 1
+
+// Preview image

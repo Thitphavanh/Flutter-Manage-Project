@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_manage/src/config/colors.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/product_item.dart';
 import 'package:flutter_project_manage/src/services/network_service.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../models/product.dart';
+import 'package:flutter_project_manage/src/config/route.dart' as custom_route;
 
 class Stock extends StatefulWidget {
   @override
@@ -14,6 +17,22 @@ class _StockState extends State<Stock> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: _buildNetwork(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: MyColors.deeporange,
+        onPressed: () {
+          Navigator.pushNamed(context, custom_route.Route.management);
+        },
+        child: const FaIcon(
+          FontAwesomeIcons.plus,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  FutureBuilder<List<Product>> _buildNetwork() {
     return FutureBuilder<List<Product>>(
       future: NetworkService().getAllProduct(),
       builder: (context, snapshot) {
