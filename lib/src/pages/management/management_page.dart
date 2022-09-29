@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/config/colors.dart';
 import 'package:flutter_project_manage/src/models/product.dart';
+import 'package:flutter_project_manage/src/pages/management/widgets/product_image.dart';
 
 class ManagementPage extends StatefulWidget {
   const ManagementPage({super.key});
@@ -49,7 +50,8 @@ class _ManagementPageState extends State<ManagementPage> {
                     child: _buildStockInput(),
                   ),
                 ],
-              )
+              ),
+              const ProductImage(),
             ],
           ),
         ),
