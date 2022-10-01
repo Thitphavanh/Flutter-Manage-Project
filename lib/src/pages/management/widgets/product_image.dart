@@ -2,17 +2,19 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProductImage extends StatefulWidget {
-  const ProductImage({super.key});
+  final Function(File imageFile) callBack;
+  ProductImage(this.callBack);
 
   @override
   State<ProductImage> createState() => _ProductImageState();
 }
 
 class _ProductImageState extends State<ProductImage> {
-  File? imageFile;
+  File? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
   @override
@@ -40,7 +42,7 @@ class _ProductImageState extends State<ProductImage> {
   }
 
   dynamic _buildPreviewImage() {
-    if (imageFile == null) {
+    if (_imageFile == null) {
       return const SizedBox();
     }
     container(Widget child) {
@@ -55,7 +57,7 @@ class _ProductImageState extends State<ProductImage> {
     return Stack(
       children: [
         container(
-          Image.file(imageFile!),
+          Image.file(_imageFile!),
         ),
         _buildDeleteImageButton(),
       ],
@@ -67,7 +69,7 @@ class _ProductImageState extends State<ProductImage> {
       child: IconButton(
         onPressed: () {
           setState(() {
-            imageFile = null;
+            _imageFile = null;
           });
         },
         icon: const Icon(
@@ -124,8 +126,46 @@ class _ProductImageState extends State<ProductImage> {
     )
         .then((file) {
       if (file != null) {
+        _cropImage(file.path);
+      }
+    });
+  }
+
+  void _cropImage(String file) {
+    ImageCropper().cropImage(
+      sourcePath: file,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+        WebUiSettings(
+          context: context,
+          presentStyle: CropperPresentStyle.dialog,
+          boundary: const CroppieBoundary(
+            width: 520,
+            height: 520,
+          ),
+        ),
+      ],
+    ).then((file) {
+      if (file != null) {
         setState(() {
-          imageFile = File(file.path);
+          _imageFile = File(file.path);
+          widget.callBack(_imageFile!);
         });
       }
     });

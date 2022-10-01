@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/config/colors.dart';
 import 'package:flutter_project_manage/src/models/product.dart';
 import 'package:flutter_project_manage/src/pages/management/widgets/product_image.dart';
+import 'package:flutter_project_manage/src/services/network_service.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ManagementPage extends StatefulWidget {
   const ManagementPage({super.key});
@@ -15,6 +20,7 @@ class _ManagementPageState extends State<ManagementPage> {
   final spacing = 8.0;
   Product? product;
   final _formKey = GlobalKey<FormState>();
+  File? imageFiles;
 
   @override
   void initState() {
@@ -27,36 +33,42 @@ class _ManagementPageState extends State<ManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: spacing,
-            horizontal: spacing,
-          ),
-          child: Column(
-            children: <Widget>[
-              _buildNameInput(),
-              SizedBox(height: spacing),
-              Row(
-                children: <Widget>[
-                  Flexible(
-                    flex: 1,
-                    child: _buildPriceInput(),
-                  ),
-                  SizedBox(width: spacing),
-                  Flexible(
-                    flex: 1,
-                    child: _buildStockInput(),
-                  ),
-                ],
-              ),
-              const ProductImage(),
-            ],
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: spacing,
+              horizontal: spacing,
+            ),
+            child: Column(
+              children: <Widget>[
+                _buildNameInput(),
+                SizedBox(height: spacing),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: _buildPriceInput(),
+                    ),
+                    SizedBox(width: spacing),
+                    Flexible(
+                      flex: 1,
+                      child: _buildStockInput(),
+                    ),
+                  ],
+                ),
+                ProductImage(callBack),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  callBack(File imageFile) {
+    this.imageFiles = imageFile;
   }
 
   AppBar _buildAppBar() {
@@ -70,9 +82,7 @@ class _ManagementPageState extends State<ManagementPage> {
         TextButton(
           onPressed: () {
             _formKey.currentState!.save();
-            print(product!.name);
-            print(product!.price.toString());
-            print(product!.stock.toString());
+            addProduct();
           },
           child: Text(
             'summit',
@@ -132,5 +142,36 @@ class _ManagementPageState extends State<ManagementPage> {
         product!.stock = value!.isEmpty ? 0 : int.parse(value);
       },
     );
+  }
+
+  void addProduct() {
+    NetworkService().addProduct(product!, imageFile: imageFiles).then((result) {
+      Navigator.pop(context);
+      showAlertBar(result);
+    }).catchError((error) {
+      showAlertBar(
+        error.toString(),
+        // ignore: deprecated_member_use
+        icon: FontAwesomeIcons.timesCircle,
+        color: Colors.red,
+      );
+    });
+  }
+
+  void showAlertBar(String message,
+      // ignore: deprecated_member_use
+      {IconData icon = FontAwesomeIcons.checkCircle,
+      Color color = Colors.redAccent}) {
+    Flushbar(
+      message: message,
+      icon: FaIcon(
+        icon,
+        size: 28.0,
+        color: color,
+      ),
+      flushbarPosition: FlushbarPosition.TOP,
+      duration: const Duration(seconds: 3),
+      flushbarStyle: FlushbarStyle.GROUNDED,
+    ).show(context);
   }
 }
