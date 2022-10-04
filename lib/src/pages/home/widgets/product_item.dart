@@ -1,26 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_project_manage/src/constanrs/api.dart';
-
+import 'package:flutter_project_manage/src/utils/format.dart';
 import 'package:flutter_project_manage/src/models/product.dart';
 import 'package:flutter_project_manage/src/pages/home/widgets/image_not_found.dart';
-import 'package:flutter_project_manage/src/utils/format.dart';
+
 
 class ProductItem extends StatelessWidget {
   final double maxHeight;
   final Product product;
+  final VoidCallback? onTap;
 
-  const ProductItem(
-    this.maxHeight,
-    this.product,
-  );
+  const ProductItem(this.maxHeight, this.product, {this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print('xxxx');
-      },
+      onTap: onTap,
       child: Container(
         color: Colors.white,
         child: Column(
